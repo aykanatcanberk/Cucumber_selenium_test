@@ -1,10 +1,10 @@
-# OrangeHRM Test Automation Project with
+# Test Automation Project with using OrangeHRM
 
 ## Overview
 
 This project contains automated test cases for the OrangeHRM demo site using Cucumber and Selenium in Java. The test cases cover various functionalities, including login, search operations, adding and deleting employees, and profile picture updates.
 
-## Features
+## Tes
 
 ### Login
 
@@ -56,7 +56,7 @@ This project contains automated test cases for the OrangeHRM demo site using Cuc
 `git clone https://github.com/aykanatcanberk/orangehrm-test-automation.git`
   
 
-## Important Notice
+## -Important Notice!
 
 **Warning:** The OrangeHRM demo site allows multiple users to perform actions simultaneously. This can lead to conflicts or inconsistencies in test results, as different tests might interact with the same data or perform operations concurrently. Please be aware of this potential issue when analyzing test results and consider running tests in isolated environments if possible.
 
