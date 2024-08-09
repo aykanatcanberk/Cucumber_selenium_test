@@ -53,7 +53,7 @@ This project contains automated test cases for the OrangeHRM demo site using Cuc
 
 1. **Clone the Repository**
    
-`git clone https://github.com/yourusername/orangehrm-test-automation.git`
+`git clone https://github.com/aykanatcanberk/orangehrm-test-automation.git`
   
 
 ## Important Notice
