@@ -38,6 +38,7 @@ public class SearchTest {
         searchLogin = new SearchLogin(driver);
         searchLogin.login("Admin", "admin123");
     }
+    //-----------------Share post and check it-------------------------
 
     @When("the user selects the Buzz menu item")
     public void theUserSelectsTheBuzzMenuItem() {
@@ -53,15 +54,14 @@ public class SearchTest {
     @Then("the user posts something {string}")
     public void theUserPostsAMessageSaying(String message) {
         WebElement postTextArea = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".oxd-buzz-post-input")));
-        postTextArea.clear(); // Clear the text area before entering a new message
+        postTextArea.clear(); 
         postTextArea.sendKeys(message);
 
         WebElement postButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".oxd-button--main")));
         postButton.click();
 
-        // Wait for the page to refresh and new posts to be visible
         driver.navigate().refresh();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30)); // Reinitialize WebDriverWait if necessary
+        wait = new WebDriverWait(driver, Duration.ofSeconds(30)); 
 
         // Ensure that posts are visible before proceeding
         List<WebElement> posts = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".orangehrm-buzz-post-body")));
@@ -71,7 +71,7 @@ public class SearchTest {
         Assert.assertTrue("The post with the message was not found.", postFound);
     }
 
-
+    //-----------------Search for menu item at SearchBox and verify search results-------------------------
     @When("the user enters {string} in the search bar")
     public void theUserEntersInTheSearchBar(String searchTerm) {
         WebElement searchBar = wait.until(ExpectedConditions
@@ -97,18 +97,19 @@ public class SearchTest {
 
         Assert.assertTrue("The search results did not contain the expected text.", found);
     }
-
+    
+     //-----------------Add a new employee and verify redirection-------------------------
     @When("the user clicks on the PIM menu item")
     public void theUserClicksOnThePIMMenuItem() {
         MenuUtils.clickMenuItem(driver, wait, "PIM");
     }
 
-    @When("the user clicks on the Add button")
+    @And("the user clicks on the Add button")
     public void theUserClicksOnTheAddButton() {
         BrowserUtils.clickButtonByXPath(driver, wait, "//button[text()=' Add ']");
     }
 
-    @When("the user fills in the First Name and Last Name fields and clicks Save")
+    @And("the user fills in the First Name and Last Name fields and clicks Save")
     public void theUserFillsInTheFirstNameAndLastNameFieldsAndClicksSave() {
         initialUrl = driver.getCurrentUrl(); // Capture the initial URL
         FormUtils.fillAndSaveName(driver, wait,"John", "Doe");
@@ -119,10 +120,8 @@ public class SearchTest {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
         try {
-            // Wait for the URL to change after the save button is clicked
             wait.until(driver -> !driver.getCurrentUrl().equals(initialUrl));
 
-            // Verify that the URL has changed
             String currentUrl = driver.getCurrentUrl();
             Assert.assertNotEquals("URL should have changed after save operation", initialUrl, currentUrl);
         } catch (Exception e) {
@@ -130,6 +129,7 @@ public class SearchTest {
         }
     }
 
+    //-----------------User logs out of the application-------------------------
     @When("The user clicks on the profile picture")
     public void theUserClicksOnTheProfilePicture() {
         BrowserUtils.clickElementByCssSelector(driver, wait, ".oxd-userdropdown-img");
@@ -144,7 +144,8 @@ public class SearchTest {
     public void theUserShouldBeRedirectedToTheLoginPage() {
         BrowserUtils.verifyUrl(driver, wait, BASE_URL + "/web/index.php/auth/login");
     }
-
+    
+    //-----------------Search for users with the "Admin" role-------------------------
     @When("the user clicks on the Admin menu item")
     public void theUserIsOnTheAdminPage() {
         MenuUtils.clickMenuItem(driver, wait, "Admin");
@@ -163,9 +164,10 @@ public class SearchTest {
     @And("The user clicks Search button")
     public void clickSearchButton() throws InterruptedException {
         BrowserUtils.clickButtonByXPath(driver, wait, "//button[@data-v-10d463b7='' and @type='submit']");
-        Thread.sleep(1000); // Ensure any asynchronous actions are completed
+        Thread.sleep(1000);
     }
 
+    //-----------------Delete all employee records-------------------------
     @When("Click on the PIM menu item")
     public void ClicksOnThePIMMenuItem() {
         MenuUtils.clickMenuItem(driver, wait, "PIM");
@@ -185,7 +187,8 @@ public class SearchTest {
     public void confirmDeletion() {
         BrowserUtils.clickButtonByXPath(driver, wait, "//button[contains(., 'Yes, Delete')]");
     }
-
+    
+    //-----------------Change Profile Picture-------------------------
     @When("User clicks on the My Info menu")
     public void userClicksOnTheMyInfoMenu() {
         MenuUtils.clickMenuItem(driver, wait, "My Info");
