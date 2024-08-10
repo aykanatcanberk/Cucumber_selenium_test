@@ -4,7 +4,7 @@
 
 This project contains automated test cases for the OrangeHRM demo site using Cucumber and Selenium in Java. The test cases cover various functionalities, including login, search operations, adding and deleting employees, and profile picture updates.
 
-## Tes
+## Features
 
 ### Login
 
