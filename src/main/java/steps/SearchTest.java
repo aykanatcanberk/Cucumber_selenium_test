@@ -53,15 +53,14 @@ public class SearchTest {
     @And("the user posts something {string}")
     public void theUserPostsAMessageSaying(String message) {
         WebElement postTextArea = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".oxd-buzz-post-input")));
-        postTextArea.clear(); // Clear the text area before entering a new message
+        postTextArea.clear(); 
         postTextArea.sendKeys(message);
 
         WebElement postButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".oxd-button--main")));
         postButton.click();
 
-        // Wait for the page to refresh and new posts to be visible
         driver.navigate().refresh();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30)); // Reinitialize WebDriverWait if necessary
+        wait = new WebDriverWait(driver, Duration.ofSeconds(30)); 
 
         // Ensure that posts are visible before proceeding
         List<WebElement> posts = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".orangehrm-buzz-post-body")));
@@ -110,7 +109,7 @@ public class SearchTest {
 
     @And("the user fills in the First Name and Last Name fields and clicks Save")
     public void theUserFillsInTheFirstNameAndLastNameFieldsAndClicksSave() {
-        initialUrl = driver.getCurrentUrl(); // Capture the initial URL
+        initialUrl = driver.getCurrentUrl(); 
         FormUtils.fillAndSaveName(driver, wait,"John", "Doe");
     }
 
@@ -119,10 +118,7 @@ public class SearchTest {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
         try {
-            // Wait for the URL to change after the save button is clicked
             wait.until(driver -> !driver.getCurrentUrl().equals(initialUrl));
-
-            // Verify that the URL has changed
             String currentUrl = driver.getCurrentUrl();
             Assert.assertNotEquals("URL should have changed after save operation", initialUrl, currentUrl);
         } catch (Exception e) {
@@ -163,7 +159,7 @@ public class SearchTest {
     @And("The user clicks Search button")
     public void clickSearchButton() throws InterruptedException {
         BrowserUtils.clickButtonByXPath(driver, wait, "//button[@data-v-10d463b7='' and @type='submit']");
-        Thread.sleep(1000); // Ensure any asynchronous actions are completed
+        Thread.sleep(1000); 
     }
 
     @When("Click on the PIM menu item")
